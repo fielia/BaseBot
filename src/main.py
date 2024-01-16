@@ -18,8 +18,10 @@ brain.screen.print("Hello World 2")
 
 left_motor = Motor(Ports.PORT1, 0.2, True)
 right_motor = Motor(Ports.PORT10, 0.2, False)
-left_motor.spin(FORWARD, 150, RPM)
-right_motor.spin(FORWARD, 150, RPM)
-
-
-        
+drive_motors = MotorGroup(left_motor, right_motor)
+drive_motors.set_velocity(150, RPM)
+# moving both motors at the same time
+drive_motors.spin_for(FORWARD, 360*5, DEGREES)
+# moving one after another
+left_motor.spin_for(FORWARD, 360*5, DEGREES)
+right_motor.spin_for(FORWARD, 360*5, DEGREES)
