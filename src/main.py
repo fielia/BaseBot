@@ -18,8 +18,8 @@ brain.screen.print("Hello World 2")
 
 left_motor = Motor(Ports.PORT1, 0.2, True)
 right_motor = Motor(Ports.PORT10, 0.2, False)
-left_motor.spin(FORWARD, 2.5, RPM)
-right_motor.spin(FORWARD, 2.5, RPM)
+left_motor.spin(FORWARD, 150, RPM)
+right_motor.spin(FORWARD, 150, RPM)
 
 
         
