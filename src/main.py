@@ -18,10 +18,33 @@ brain.screen.print("Hello World 2")
 
 left_motor = Motor(Ports.PORT1, 0.2, True)
 right_motor = Motor(Ports.PORT10, 0.2, False)
+arm_motor = Motor(Ports.PORT8, 0.2, True) # take a look at params for validity
+button = Bumper(brain.three_wire_port.d)
+range_finder = Sonar(brain.three_wire_port.e)
+
 drive_motors = MotorGroup(left_motor, right_motor)
-drive_motors.set_velocity(150, RPM)
-# moving both motors at the same time
-drive_motors.spin_for(FORWARD, 360*5, DEGREES)
-# moving one after another
-left_motor.spin_for(FORWARD, 360*5, DEGREES)
-right_motor.spin_for(FORWARD, 360*5, DEGREES)
+
+
+
+arm_motor.set_velocity(150)
+
+def driveOn() -> None:
+	arm_motor.spin_for(FORWARD, 120, DEGREES) # TODO: test
+	drive_motors.set_velocity(150)
+	drive_motors.spin(FORWARD)
+	while range_finder.distance(MM) > 200 and range_finder.distance(MM) < 5: # TODO: test
+		# keep spinning
+		continue
+	drive_motors.set_velocity(100)
+	while range_finder.distance(MM) > 100 and range_finder.distance(MM) < 5: # TODO: test
+		# keep spinning
+		continue
+	drive_motors.set_velocity(50)
+	while range_finder.distance(MM) > 50 and range_finder.distance(MM) < 5: # TODO: test
+		# keep spinning
+		continue
+	drive_motors.stop()
+	arm_motor.spin_for(REVERSE, 75, DEGREES)  # TODO: test
+	brain.screen.print(arm_motor.torque())
+
+button.pressed(driveOn)
