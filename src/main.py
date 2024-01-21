@@ -67,14 +67,14 @@ def drive() -> None:
 		brain.screen.print_at(distance_trials[0], x=50, y=50)
 	drive_motors.set_velocity(100, RPM)
 	brain.screen.print_at("100 RPM", x=50, y=100)
-	while check_change(distance_trials, accuracy, 175, 35):
+	while check_change(distance_trials, accuracy, 180, 35):
 		distance_trials = addValue(distance_trials, range_finder.distance(MM))
 		# keep spinning
 		brain.screen.clear_line();
 		brain.screen.print_at(distance_trials[0], x=50, y=50)
 	drive_motors.set_velocity(50, RPM)
 	brain.screen.print_at("50 RPM ", x=50, y=100)
-	while check_change(distance_trials, accuracy, 90, 35):
+	while check_change(distance_trials, accuracy, 115, 35):
 		distance_trials = addValue(distance_trials, range_finder.distance(MM))
 		# keep spinning
 		brain.screen.clear_line();
